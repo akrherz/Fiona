@@ -39,21 +39,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
-        gdal-version: ['3.9.3']
+        python-version: ['3.11', '3.12', '3.13', '3.14']
+        gdal-version: ['3.12.1']
         include:
-          - python-version: '3.8'
-            gdal-version: '3.4.3'
-          - python-version: '3.9'
-            gdal-version: '3.5.3'
-          - python-version: '3.10'
-            gdal-version: '3.6.4'
-          - python-version: '3.11'
-            gdal-version: '3.7.3'
-          - python-version: '3.12'
-            gdal-version: '3.8.4'
           - python-version: '3.12'
             gdal-version: '3.9.3'
+          - python-version: '3.13'
+            gdal-version: '3.10.3'
+          - python-version: '3.14'
+            gdal-version: '3.11.5'
 
     steps:
       - uses: actions/checkout@v4
@@ -96,12 +90,12 @@ jobs:
       fail-fast: true
       matrix:
         os: [macos-13, macos-14]
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
         include:
           - os: ubuntu-latest
-            python-version: '*'
+            python-version: '3.14'
           - os: windows-latest
-            python-version: '3.12'
+            python-version: '3.14'
     steps:
       - uses: actions/checkout@v4
 
@@ -115,7 +109,7 @@ jobs:
           environment-name: test
           create-args: >-
             python=${{ matrix.python-version }}
-            libgdal=3.9
+            libgdal=3.12
             geos>=3.12
             cython=3
             numpy
