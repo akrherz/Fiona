@@ -5,6 +5,8 @@ import os
 import fiona
 from fiona.model import Feature
 
+from .conftest import requires_gdal313
+
 
 def test_read_bool_subtype(tmp_path):
     test_data = """{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"bool": true, "not_bool": 1, "float": 42.5}, "geometry": null}]}"""
@@ -21,6 +23,7 @@ def test_read_bool_subtype(tmp_path):
     assert type(feature["properties"]["float"]) is float
 
 
+@requires_gdal313
 def test_write_bool_subtype(tmp_path):
     path = tmp_path.joinpath("test_write_bool_subtype.geojson")
 
@@ -50,8 +53,8 @@ def test_write_bool_subtype(tmp_path):
     with open(os.fspath(path)) as f:
         data = f.read()
 
-    assert """"bool": true""" in data
-    assert """"not_bool": 1""" in data
+    assert """"bool":true""" in data
+    assert """"not_bool":1""" in data
 
 
 def test_write_int16_subtype(tmp_path):

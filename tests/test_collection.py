@@ -23,7 +23,7 @@ from fiona.errors import (
 )
 from fiona.model import Feature, Geometry
 
-from .conftest import WGS84PATTERN
+from .conftest import WGS84PATTERN, requires_gdal313
 
 
 class TestSupportedDrivers:
@@ -1008,6 +1008,7 @@ def test_date(tmpdir):
         assert rf2.properties["date"] == "2014-02-03"
 
 
+@requires_gdal313
 def test_open_kwargs(tmpdir, path_coutwildrnp_shp):
     dstfile = str(tmpdir.join("test.json"))
     with fiona.open(path_coutwildrnp_shp) as src:
@@ -1018,7 +1019,7 @@ def test_open_kwargs(tmpdir, path_coutwildrnp_shp):
             dst.writerecords(ftr for ftr in src)
 
     with open(dstfile) as f:
-        assert '"coordinates": [ [ [ -111.74, 42.0 ], [ -111.66, 42.0 ]' in f.read(2000)
+        assert '"coordinates":[[[-111.74,42.0],[-111.66,42.0]' in f.read(2000)
 
 
 @pytest.mark.network
