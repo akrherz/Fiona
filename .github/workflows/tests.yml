@@ -111,7 +111,6 @@ jobs:
             python=${{ matrix.python-version }}
             libgdal=3.12
             geos>=3.12
-            cython=3
             numpy
 
       - name: Install Env
