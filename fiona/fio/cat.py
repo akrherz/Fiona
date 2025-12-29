@@ -45,11 +45,6 @@ warnings.simplefilter("default")
     help="filter for features intersecting a bounding box",
 )
 @click.option(
-    "--where",
-    default=None,
-    help="attribute filter using SQL where clause",
-)
-@click.option(
     "--cut-at-antimeridian",
     is_flag=True,
     default=False,
