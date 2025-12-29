@@ -109,8 +109,10 @@ jobs:
           environment-name: test
           create-args: >-
             python=${{ matrix.python-version }}
-            libgdal=3.12
+            coverage=6.5.0
+            cython
             geos>=3.12
+            libgdal=3.12
             numpy
 
       - name: Install Env
@@ -133,6 +135,7 @@ jobs:
         run: |
           micromamba run -n test python -V
           micromamba info
+          coverage --version
 
       - name: Test with Coverage (Ubuntu)
         if: matrix.os == 'ubuntu-latest'
