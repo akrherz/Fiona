@@ -346,6 +346,10 @@ requires_gdal33 = pytest.mark.skipif(
     not gdal_version.at_least("3.3"), reason="Requires at least GDAL 3.3.0"
 )
 
+requires_gdal313 = pytest.mark.skipif(
+    not gdal_version.at_least("3.13"), reason="Requires at least GDAL 3.13.0"
+)
+
 travis_only = pytest.mark.skipif(
     not os.getenv("TRAVIS", "false") == "true", reason="Requires travis CI environment"
 )
